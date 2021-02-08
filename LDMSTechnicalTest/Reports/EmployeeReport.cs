@@ -13,20 +13,16 @@ namespace LDMSTechnicalTest.Reports
             _departments = departments;
         }
 
-        public List<Dictionary<string,string>> EmployeesInDepartment(string departmentName)
-        {
-            var department = _departments.Single(d => d.DepartmentName == departmentName);
-
-            return _employees.Where(e => e.DepartmentId == department.DepartmentId)
-                    .Select(e => new Dictionary<string, string>
-                        {
-                            { "Employee Id", e.EmployeeId.ToString() },
-                            { "Employee Name", e.EmployeeName },
-                            { "Job Title", e.JobTitle },
-                            { "Salary", e.Salary.ToString() }
-                        }
-                    ).ToList();
-        }
+        public List<Dictionary<string,string>> EmployeesInDepartment(int departmentId)
+            => _employees.Where(e => e.DepartmentId == departmentId)
+                        .Select(e => new Dictionary<string, string>
+                            {
+                                { "Employee Id", e.EmployeeId.ToString() },
+                                { "Employee Name", e.EmployeeName },
+                                { "Job Title", e.JobTitle },
+                                { "Salary", e.Salary.ToString() }
+                            }
+                        ).ToList();
 
         public List<Dictionary<string,string>> EmployeesInLocation(string location)
         {
